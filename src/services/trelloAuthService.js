@@ -34,6 +34,29 @@ export async function clearToken(t) {
   localStorage.removeItem(TOKEN_STORAGE_KEY)
 }
 
+function openDirectTrelloAuth(key, appName, t, resolve, reject) {
+  const returnUrl = window.location.href
+  const authUrl = `https://trello.com/1/authorize?expiration=never&name=${encodeURIComponent(appName)}&scope=read,write&response_type=token&key=${key}&return_url=${encodeURIComponent(returnUrl)}`
+
+  const authWindow = window.open(authUrl, 'TrelloAuthorization', 'width=580,height=700')
+
+  const timer = setInterval(() => {
+    if (authWindow && authWindow.closed) {
+      clearInterval(timer)
+      const hashMatch = window.location.hash.match(/token=([^&]+)/)
+      if (hashMatch && hashMatch[1]) {
+        const token = hashMatch[1]
+        saveToken(t, token)
+        resolve(token)
+      } else {
+        const token = localStorage.getItem(TOKEN_STORAGE_KEY)
+        if (token) resolve(token)
+        else reject(new Error('Authorization popup closed. If token was generated, paste it or try again.'))
+      }
+    }
+  }, 500)
+}
+
 export function authorizeWithTrello(t, apiKey) {
   return new Promise((resolve, reject) => {
     const key = apiKey || import.meta.env.VITE_TRELLO_API_KEY
@@ -44,42 +67,30 @@ export function authorizeWithTrello(t, apiKey) {
 
     const appName = import.meta.env.VITE_APP_NAME || 'Smart Search Power-Up'
 
-    // If running in Trello Power-Up context, use t.getRestApi().authorize()
+    // If running in Trello Power-Up context, attempt t.getRestApi()
     if (t && typeof t.getRestApi === 'function') {
-      const restApi = t.getRestApi()
-      if (restApi && typeof restApi.authorize === 'function') {
-        restApi.authorize({
-          scope: 'read,write',
-          expiration: 'never'
-        }).then(async (token) => {
-          await saveToken(t, token)
-          resolve(token)
-        }).catch(reject)
-        return
+      try {
+        const restApi = t.getRestApi()
+        if (restApi && typeof restApi.authorize === 'function') {
+          restApi.authorize({
+            name: appName,
+            scope: 'read,write',
+            expiration: 'never'
+          }).then(async (token) => {
+            await saveToken(t, token)
+            resolve(token)
+          }).catch(() => {
+            // Fallback to direct window
+            openDirectTrelloAuth(key, appName, t, resolve, reject)
+          })
+          return
+        }
+      } catch {
+        // Fallback to direct window
       }
     }
 
-    // Fallback Popup authorization via Trello's OAuth endpoint
-    const returnUrl = window.location.href
-    const authUrl = `https://trello.com/1/authorize?expiration=never&name=${encodeURIComponent(appName)}&scope=read&response_type=token&key=${key}&return_url=${encodeURIComponent(returnUrl)}`
-
-    const authWindow = window.open(authUrl, 'TrelloAuthorization', 'width=580,height=700')
-
-    const timer = setInterval(() => {
-      if (authWindow && authWindow.closed) {
-        clearInterval(timer)
-        // Check hash or storage
-        const hashMatch = window.location.hash.match(/token=([^&]+)/)
-        if (hashMatch && hashMatch[1]) {
-          const token = hashMatch[1]
-          saveToken(t, token)
-          resolve(token)
-        } else {
-          const token = localStorage.getItem(TOKEN_STORAGE_KEY)
-          if (token) resolve(token)
-          else reject(new Error('Authorization was closed or cancelled.'))
-        }
-      }
-    }, 500)
+    // Direct Trello popup fallback
+    openDirectTrelloAuth(key, appName, t, resolve, reject)
   })
 }

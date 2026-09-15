@@ -52,10 +52,15 @@ export function initTrelloPowerUp() {
   }
 }
 
-export function getTrelloContext() {
+export function getTrelloContext(apiKey) {
   if (typeof window !== 'undefined' && window.TrelloPowerUp) {
     try {
-      return window.TrelloPowerUp.iframe()
+      const key = apiKey || import.meta.env.VITE_TRELLO_API_KEY
+      const appName = import.meta.env.VITE_APP_NAME || 'Smart Search Power-Up'
+      return window.TrelloPowerUp.iframe({
+        appKey: key,
+        appName: appName
+      })
     } catch {
       return null
     }
