@@ -1,4 +1,4 @@
-// Initialize Trello Power-Up capabilities if running inside Trello iframe
+// Initialize Trello Power-Up capabilities (Zero Auth Mode)
 export function initTrelloPowerUp() {
   if (typeof window !== 'undefined' && window.TrelloPowerUp) {
     try {
@@ -13,7 +13,7 @@ export function initTrelloPowerUp() {
               text: 'Smart Search',
               callback: function (t) {
                 return t.modal({
-                  title: 'Search Workspace Cards',
+                  title: 'Search Board Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
@@ -29,7 +29,7 @@ export function initTrelloPowerUp() {
               text: 'Smart Search',
               callback: function (t) {
                 return t.modal({
-                  title: 'Search Workspace Cards',
+                  title: 'Search Board Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
@@ -37,13 +37,6 @@ export function initTrelloPowerUp() {
               }
             }
           ]
-        },
-        'show-authorization': function (t) {
-          return t.popup({
-            title: 'Authorization Required',
-            url: './index.html',
-            height: 380
-          })
         }
       })
     } catch {
@@ -52,15 +45,10 @@ export function initTrelloPowerUp() {
   }
 }
 
-export function getTrelloContext(apiKey) {
+export function getTrelloContext() {
   if (typeof window !== 'undefined' && window.TrelloPowerUp) {
     try {
-      const key = apiKey || import.meta.env.VITE_TRELLO_API_KEY
-      const appName = import.meta.env.VITE_APP_NAME || 'Smart Search Power-Up'
-      return window.TrelloPowerUp.iframe({
-        appKey: key,
-        appName: appName
-      })
+      return window.TrelloPowerUp.iframe()
     } catch {
       return null
     }

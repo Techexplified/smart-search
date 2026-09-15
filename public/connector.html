@@ -6,7 +6,7 @@
     <!-- Official Trello Power-Up Client Library -->
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script>
-      // Dedicated Trello Power-Up connector capability initialization
+      // Dedicated Trello Power-Up connector capability initialization (Zero Auth)
       window.TrelloPowerUp.initialize({
         'board-buttons': function (t) {
           return [
@@ -18,7 +18,7 @@
               text: 'Smart Search',
               callback: function (tContext) {
                 return tContext.modal({
-                  title: 'Search Workspace Cards',
+                  title: 'Search Board Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
@@ -34,7 +34,7 @@
               text: 'Smart Search',
               callback: function (tContext) {
                 return tContext.modal({
-                  title: 'Search Workspace Cards',
+                  title: 'Search Board Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
@@ -42,13 +42,6 @@
               }
             }
           ];
-        },
-        'show-authorization': function (t) {
-          return t.popup({
-            title: 'Authorization Required',
-            url: './index.html',
-            height: 380
-          });
         }
       });
     </script>
