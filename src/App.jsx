@@ -34,7 +34,7 @@ export default function App() {
     sortBy: 'Due Date (Earliest / Overdue)'
   })
 
-  // Load cards directly from Trello Power-Up SDK (Zero Auth Needed)
+  // Load cards directly from Trello Power-Up SDK
   const loadCards = useCallback(async () => {
     try {
       if (tContext) {
@@ -60,6 +60,21 @@ export default function App() {
     }, 0)
     return () => clearTimeout(timer)
   }, [loadCards])
+
+  // Open / Redirect to selected Trello card
+  const handleOpenCard = (card) => {
+    if (tContext && typeof tContext.showCard === 'function') {
+      try {
+        tContext.showCard(card.id)
+        return
+      } catch {
+        // Fallback below
+      }
+    }
+    if (card.url) {
+      window.open(card.url, '_blank')
+    }
+  }
 
   // Apply filtering logic to board cards
   const filteredCards = useMemo(() => {
@@ -181,6 +196,7 @@ export default function App() {
               cards={filteredCards}
               sortBy={filterState.sortBy}
               onSortByChange={(val) => handleFilterChange('sortBy', val)}
+              onOpenCard={handleOpenCard}
             />
           </>
         )}

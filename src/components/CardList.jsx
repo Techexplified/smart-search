@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function CardList({ cards, sortBy, onSortByChange }) {
+export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) {
   const [selectedCardIds, setSelectedCardIds] = useState([])
 
   const isAllSelected = cards.length > 0 && selectedCardIds.length === cards.length
@@ -31,7 +31,7 @@ export default function CardList({ cards, sortBy, onSortByChange }) {
               type="checkbox"
               checked={isAllSelected}
               onChange={handleToggleSelectAll}
-              className="w-4 h-4 rounded bg-[#162238] border-slate-700 text-blue-600 focus:ring-blue-500"
+              className="w-4 h-4 rounded bg-[#162238] border-slate-700 text-blue-600 focus:ring-blue-500 cursor-pointer"
             />
             <span>Select All</span>
           </label>
@@ -137,8 +137,11 @@ export default function CardList({ cards, sortBy, onSortByChange }) {
                       )}
                     </div>
 
-                    {/* Title */}
-                    <h3 className="text-base font-bold text-slate-100 group-hover:text-blue-300 transition-colors">
+                    {/* Title (Clickable) */}
+                    <h3
+                      onClick={() => onOpenCard && onOpenCard(card)}
+                      className="text-base font-bold text-slate-100 hover:text-blue-400 transition-colors cursor-pointer inline-block"
+                    >
                       {card.title}
                     </h3>
 
@@ -173,7 +176,10 @@ export default function CardList({ cards, sortBy, onSortByChange }) {
                           />
                         )}
 
-                        <button className="text-xs font-semibold text-blue-400 hover:text-blue-300 transition-colors flex items-center gap-1">
+                        <button
+                          onClick={() => onOpenCard && onOpenCard(card)}
+                          className="px-2.5 py-1 rounded-md text-xs font-semibold text-blue-400 hover:text-white bg-blue-950/40 hover:bg-blue-600 border border-blue-800/50 transition-all flex items-center gap-1 cursor-pointer"
+                        >
                           Details →
                         </button>
                       </div>
