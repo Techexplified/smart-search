@@ -7,43 +7,6 @@
     <title>Trello Smart Search Power-Up</title>
     <!-- Trello Power-Up Client Library -->
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
-    <script>
-      // Initialize Trello Power-Up capabilities immediately for Trello connector iframe
-      if (typeof window !== 'undefined' && window.TrelloPowerUp) {
-        try {
-          window.TrelloPowerUp.initialize({
-            'board-buttons': function (t) {
-              return [
-                {
-                  icon: {
-                    dark: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg',
-                    light: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg'
-                  },
-                  text: 'Smart Search',
-                  callback: function (tContext) {
-                    return tContext.modal({
-                      title: 'Search Workspace Cards',
-                      url: './index.html',
-                      height: 680,
-                      fullscreen: false
-                    });
-                  }
-                }
-              ];
-            },
-            'show-authorization': function (t) {
-              return t.popup({
-                title: 'Authorization Required',
-                url: './index.html',
-                height: 380
-              });
-            }
-          });
-        } catch (e) {
-          // Sub-iframe modal execution
-        }
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

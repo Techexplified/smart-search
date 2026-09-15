@@ -1,9 +1,14 @@
-// Initialize Trello Power-Up capabilities if running inside Trello iframe
-export function initTrelloPowerUp() {
-  if (typeof window !== 'undefined' && window.TrelloPowerUp) {
-    try {
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Trello Power-Up Connector</title>
+    <!-- Official Trello Power-Up Client Library -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+    <script>
+      // Dedicated Trello Power-Up connector capability initialization
       window.TrelloPowerUp.initialize({
-        'board-buttons': function () {
+        'board-buttons': function (t) {
           return [
             {
               icon: {
@@ -11,54 +16,42 @@ export function initTrelloPowerUp() {
                 light: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg'
               },
               text: 'Smart Search',
-              callback: function (t) {
-                return t.modal({
+              callback: function (tContext) {
+                return tContext.modal({
                   title: 'Search Workspace Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
-                })
+                });
               }
             }
-          ]
+          ];
         },
-        'card-buttons': function () {
+        'card-buttons': function (t) {
           return [
             {
               icon: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg',
               text: 'Smart Search',
-              callback: function (t) {
-                return t.modal({
+              callback: function (tContext) {
+                return tContext.modal({
                   title: 'Search Workspace Cards',
                   url: './index.html',
                   height: 680,
                   fullscreen: false
-                })
+                });
               }
             }
-          ]
+          ];
         },
         'show-authorization': function (t) {
           return t.popup({
             title: 'Authorization Required',
             url: './index.html',
             height: 380
-          })
+          });
         }
-      })
-    } catch {
-      // Already initialized or running in sub-iframe mode
-    }
-  }
-}
-
-export function getTrelloContext() {
-  if (typeof window !== 'undefined' && window.TrelloPowerUp) {
-    try {
-      return window.TrelloPowerUp.iframe()
-    } catch {
-      return null
-    }
-  }
-  return null
-}
+      });
+    </script>
+  </head>
+  <body></body>
+</html>
