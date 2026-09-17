@@ -1,8 +1,32 @@
 export const SAVED_SEARCHES = [
-  { id: 'overdue-high', name: 'My Overdue High Priority', count: 11, color: 'text-red-400 border-red-500/40 bg-red-500/10', icon: 'error' },
-  { id: 'waiting-client', name: 'Waiting for Client', count: 12, color: 'text-amber-400 border-amber-500/40 bg-amber-500/10', icon: 'time' },
-  { id: 'qa-pending', name: 'QA Pending', count: 9, color: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10', icon: 'check' },
-  { id: 'unassigned-urgent', name: 'Unassigned Urgent', count: 2, color: 'text-purple-400 border-purple-500/40 bg-purple-500/10', icon: 'help' },
+  {
+    id: 'overdue-high',
+    name: 'My Overdue High Priority',
+    color: 'text-red-400 border-red-500/40 bg-red-500/10',
+    icon: 'error',
+    criteria: { quickFilter: 'overdue', filterState: { priority: 'High Priority' } }
+  },
+  {
+    id: 'waiting-client',
+    name: 'Waiting for Client',
+    color: 'text-amber-400 border-amber-500/40 bg-amber-500/10',
+    icon: 'time',
+    criteria: { query: 'Client' }
+  },
+  {
+    id: 'qa-pending',
+    name: 'QA Pending',
+    color: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
+    icon: 'check',
+    criteria: { filterState: { list: 'Under Review' } }
+  },
+  {
+    id: 'unassigned-urgent',
+    name: 'Unassigned Urgent',
+    color: 'text-purple-400 border-purple-500/40 bg-purple-500/10',
+    icon: 'help',
+    criteria: { filterState: { priority: 'Urgent' } }
+  },
 ]
 
 export const QUICK_SEARCH_CHIPS = [

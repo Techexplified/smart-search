@@ -5,11 +5,23 @@ import DeepFilters from './components/DeepFilters'
 import CardList from './components/CardList'
 import { initTrelloPowerUp, getTrelloContext } from './trelloPowerUp'
 import { fetchCurrentBoardCards } from './services/trelloBoardSdk'
-import { MOCK_CARDS } from './data/mockCards'
+import { MOCK_CARDS, SAVED_SEARCHES } from './data/mockCards'
 import { filterCards } from './services/trelloApi'
 
 // Initialize Trello Power-Up hooks if loaded inside Trello
 initTrelloPowerUp()
+
+const INITIAL_FILTER_STATE = {
+  board: 'All Boards',
+  list: 'All Lists',
+  member: 'All Members',
+  dueDate: 'Any Due Date',
+  priority: 'All Priorities',
+  checklistStatus: 'Any Checklist Status',
+  selectedLabels: [],
+  status: 'Active',
+  sortBy: 'Due Date (Earliest / Overdue)'
+}
 
 export default function App() {
   const [tContext] = useState(() => getTrelloContext())
@@ -17,22 +29,13 @@ export default function App() {
   const [boardCards, setBoardCards] = useState([])
 
   // Search & Filter State
+  const [savedSearches, setSavedSearches] = useState(SAVED_SEARCHES)
   const [activeSavedSearch, setActiveSavedSearch] = useState(null)
   const [query, setQuery] = useState('')
   const [quickFilter, setQuickFilter] = useState(null)
   const [isDeepFiltersExpanded, setIsDeepFiltersExpanded] = useState(false)
 
-  const [filterState, setFilterState] = useState({
-    board: 'All Boards',
-    list: 'All Lists',
-    member: 'All Members',
-    dueDate: 'Any Due Date',
-    priority: 'All Priorities',
-    checklistStatus: 'Any Checklist Status',
-    selectedLabels: [],
-    status: 'Active',
-    sortBy: 'Due Date (Earliest / Overdue)'
-  })
+  const [filterState, setFilterState] = useState(INITIAL_FILTER_STATE)
 
   // Load cards directly from Trello Power-Up SDK
   const loadCards = useCallback(async () => {
@@ -89,22 +92,64 @@ export default function App() {
   const handleSelectSavedSearch = (presetId) => {
     if (activeSavedSearch === presetId) {
       setActiveSavedSearch(null)
+      setQuery('')
       setQuickFilter(null)
-      setFilterState(prev => ({ ...prev, priority: 'All Priorities', dueDate: 'Any Due Date' }))
+      setFilterState(INITIAL_FILTER_STATE)
       return
     }
 
+    const targetPreset = savedSearches.find(s => s.id === presetId)
+    if (!targetPreset) return
+
     setActiveSavedSearch(presetId)
-    if (presetId === 'overdue-high') {
-      setQuickFilter('overdue')
-      setFilterState(prev => ({ ...prev, priority: 'High Priority' }))
-    } else if (presetId === 'waiting-client') {
-      setQuery('Client')
-    } else if (presetId === 'qa-pending') {
-      setFilterState(prev => ({ ...prev, list: 'Under Review' }))
-    } else if (presetId === 'unassigned-urgent') {
-      setFilterState(prev => ({ ...prev, priority: 'Urgent' }))
+    const criteria = targetPreset.criteria || {}
+    setQuery(criteria.query || '')
+    setQuickFilter(criteria.quickFilter || null)
+    setFilterState({
+      ...INITIAL_FILTER_STATE,
+      ...(criteria.filterState || {})
+    })
+  }
+
+  const handleDeleteSavedSearch = (presetId) => {
+    setSavedSearches(prev => prev.filter(s => s.id !== presetId))
+    if (activeSavedSearch === presetId) {
+      setActiveSavedSearch(null)
     }
+  }
+
+  const handleSaveCurrentSearch = () => {
+    let defaultName = query ? `Query: ${query}` : ''
+    if (!defaultName && quickFilter) {
+      defaultName = `Filter: ${quickFilter}`
+    }
+    if (!defaultName && filterState.priority !== 'All Priorities') {
+      defaultName = filterState.priority
+    }
+    if (!defaultName && filterState.list !== 'All Lists') {
+      defaultName = filterState.list
+    }
+    if (!defaultName) {
+      defaultName = 'Custom Search'
+    }
+
+    const presetName = window.prompt('Enter a name for this saved smart search:', defaultName)
+    if (!presetName || !presetName.trim()) return
+
+    const newPreset = {
+      id: `custom-${Date.now()}`,
+      name: presetName.trim(),
+      icon: 'filter',
+      color: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
+      criteria: {
+        query,
+        quickFilter,
+        filterState: { ...filterState }
+      }
+    }
+
+    setSavedSearches(prev => [...prev, newPreset])
+    setActiveSavedSearch(newPreset.id)
   }
 
   const handleSelectQuickChip = (chipText) => {
@@ -167,9 +212,11 @@ export default function App() {
           <>
             {/* Saved Smart Searches Bar */}
             <SavedSearches
+              savedSearches={savedSearches}
               activeSavedSearch={activeSavedSearch}
               onSelectSavedSearch={handleSelectSavedSearch}
-              onSaveCurrentSearch={() => alert(`Saved filter preset for query: "${query || 'All'}"`)}
+              onDeleteSavedSearch={handleDeleteSavedSearch}
+              onSaveCurrentSearch={handleSaveCurrentSearch}
             />
 
             {/* Search Input & Quick Chips */}
