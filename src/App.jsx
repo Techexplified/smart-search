@@ -118,22 +118,15 @@ export default function App() {
     }
   }
 
-  const handleSaveCurrentSearch = () => {
-    let defaultName = query ? `Query: ${query}` : ''
-    if (!defaultName && quickFilter) {
-      defaultName = `Filter: ${quickFilter}`
-    }
-    if (!defaultName && filterState.priority !== 'All Priorities') {
-      defaultName = filterState.priority
-    }
-    if (!defaultName && filterState.list !== 'All Lists') {
-      defaultName = filterState.list
-    }
-    if (!defaultName) {
-      defaultName = 'Custom Search'
-    }
+  const defaultSuggestedName = useMemo(() => {
+    if (query) return `Query: ${query}`
+    if (quickFilter) return `Filter: ${quickFilter}`
+    if (filterState.priority !== 'All Priorities') return filterState.priority
+    if (filterState.list !== 'All Lists') return filterState.list
+    return 'Custom Search'
+  }, [query, quickFilter, filterState])
 
-    const presetName = window.prompt('Enter a name for this saved smart search:', defaultName)
+  const handleSaveCurrentSearch = (presetName) => {
     if (!presetName || !presetName.trim()) return
 
     const newPreset = {
@@ -214,6 +207,7 @@ export default function App() {
             <SavedSearches
               savedSearches={savedSearches}
               activeSavedSearch={activeSavedSearch}
+              defaultSuggestedName={defaultSuggestedName}
               onSelectSavedSearch={handleSelectSavedSearch}
               onDeleteSavedSearch={handleDeleteSavedSearch}
               onSaveCurrentSearch={handleSaveCurrentSearch}
