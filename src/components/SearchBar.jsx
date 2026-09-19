@@ -43,11 +43,8 @@ export default function SearchBar({ query, onQueryChange, matchCount, onSelectQu
 
       {/* Quick Search Suggestions */}
       <div className="flex flex-wrap items-center gap-2 text-xs">
-        <span className="text-slate-400 font-medium flex items-center gap-1.5">
-          <svg className="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          <span>Quick search:</span>
+        <span className="text-slate-400 font-medium">
+          Quick search:
         </span>
         {QUICK_SEARCH_CHIPS.map((chip) => (
           <button

@@ -27,11 +27,8 @@ export default function SavedSearches({
 
   return (
     <div className="flex flex-wrap items-center gap-3 mb-6">
-      <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-slate-400 uppercase">
-        <svg className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
-          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-        </svg>
-        <span>SAVED SMART SEARCHES:</span>
+      <div className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
+        SAVED SMART SEARCHES:
       </div>
 
       <div className="flex flex-wrap items-center gap-2.5">
@@ -47,31 +44,6 @@ export default function SavedSearches({
                   : 'bg-[#152033]/80 border-slate-700/60 text-slate-300 hover:bg-[#1e2d47] hover:border-slate-600'
               }`}
             >
-              {preset.icon === 'error' && (
-                <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              {preset.icon === 'time' && (
-                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              {preset.icon === 'check' && (
-                <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              {preset.icon === 'help' && (
-                <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              )}
-              {(!preset.icon || preset.icon === 'filter') && (
-                <svg className="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
-              )}
               <span>{preset.name}</span>
               <button
                 type="button"
