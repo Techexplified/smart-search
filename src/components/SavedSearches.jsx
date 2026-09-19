@@ -28,7 +28,9 @@ export default function SavedSearches({
   return (
     <div className="flex flex-wrap items-center gap-3 mb-6">
       <div className="flex items-center gap-1.5 text-xs font-semibold tracking-wider text-slate-400 uppercase">
-        <span className="text-amber-400 text-sm">✨</span>
+        <svg className="w-3.5 h-3.5 text-amber-400" fill="currentColor" viewBox="0 0 20 20">
+          <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
+        </svg>
         <span>SAVED SMART SEARCHES:</span>
       </div>
 
@@ -46,19 +48,29 @@ export default function SavedSearches({
               }`}
             >
               {preset.icon === 'error' && (
-                <span className="w-4 h-4 rounded-full bg-red-500/20 text-red-400 flex items-center justify-center text-[10px] font-bold">!</span>
+                <svg className="w-3.5 h-3.5 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               )}
               {preset.icon === 'time' && (
-                <span className="w-4 h-4 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-[10px]">🕒</span>
+                <svg className="w-3.5 h-3.5 text-amber-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               )}
               {preset.icon === 'check' && (
-                <span className="w-4 h-4 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-[10px]">✓</span>
+                <svg className="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               )}
               {preset.icon === 'help' && (
-                <span className="w-4 h-4 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center text-[10px]">?</span>
+                <svg className="w-3.5 h-3.5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
               )}
               {(!preset.icon || preset.icon === 'filter') && (
-                <span className="w-4 h-4 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center text-[10px]">🔍</span>
+                <svg className="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
               )}
               <span>{preset.name}</span>
               <button
@@ -67,7 +79,7 @@ export default function SavedSearches({
                   e.stopPropagation()
                   onDeleteSavedSearch(preset.id)
                 }}
-                className="ml-0.5 text-slate-400 hover:text-red-400 hover:bg-red-500/20 rounded-full w-4 h-4 flex items-center justify-center transition-colors text-[11px] leading-none"
+                className="ml-0.5 text-slate-400 hover:text-red-400 hover:bg-red-500/20 rounded-full w-4 h-4 flex items-center justify-center transition-colors text-[11px] leading-none cursor-pointer"
                 title="Delete saved search"
                 aria-label={`Delete ${preset.name}`}
               >

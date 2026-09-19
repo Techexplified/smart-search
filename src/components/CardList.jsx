@@ -42,8 +42,11 @@ export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) 
         </div>
 
         <div className="flex items-center gap-2 text-xs">
-          <span className="text-slate-400 font-medium flex items-center gap-1">
-            <span>⇅</span> Sort by:
+          <span className="text-slate-400 font-medium flex items-center gap-1.5">
+            <svg className="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 16V4m0 0L3 8m4-4l4 4m6 0v12m0 0l4-4m-4 4l-4-4" />
+            </svg>
+            <span>Sort by:</span>
           </span>
           <select
             value={sortBy}
@@ -60,7 +63,11 @@ export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) 
       {/* Card List Items */}
       {cards.length === 0 ? (
         <div className="text-center py-16 bg-[#0f172a]/40 border border-slate-800/80 rounded-xl space-y-3">
-          <div className="text-4xl">🔍</div>
+          <div className="w-12 h-12 mx-auto rounded-full bg-slate-800/80 border border-slate-700/60 flex items-center justify-center text-slate-400">
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
           <h3 className="text-slate-200 font-semibold">No matching cards found</h3>
           <p className="text-xs text-slate-400 max-w-sm mx-auto">
             Try adjusting your search keywords, clearing Deep Filters, or choosing a different board preset.
@@ -121,18 +128,23 @@ export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) 
                       <span
                         className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-semibold border ${
                           card.isOverdue
-                            ? 'bg-emerald-950/40 text-emerald-400 border-emerald-800/50'
+                            ? 'bg-red-950/40 text-red-400 border-red-800/50'
                             : 'bg-slate-800/80 text-slate-400 border-slate-700/60'
                         }`}
                       >
-                        <span>✓</span>
+                        <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                        </svg>
                         <span>{card.dueDate}</span>
                       </span>
 
                       {/* Checklist Badge if exists */}
                       {card.checklistText && (
-                        <span className="px-2 py-0.5 rounded bg-purple-950/40 text-purple-300 border border-purple-800/50 text-[11px]">
-                          📋 {card.checklistText}
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded bg-purple-950/40 text-purple-300 border border-purple-800/50 text-[11px]">
+                          <svg className="w-3 h-3 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 022 2h2a2 2 0 022-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+                          </svg>
+                          <span>{card.checklistText}</span>
                         </span>
                       )}
                     </div>
@@ -180,7 +192,10 @@ export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) 
                           onClick={() => onOpenCard && onOpenCard(card)}
                           className="px-2.5 py-1 rounded-md text-xs font-semibold text-blue-400 hover:text-white bg-blue-950/40 hover:bg-blue-600 border border-blue-800/50 transition-all flex items-center gap-1 cursor-pointer"
                         >
-                          Details →
+                          <span>Details</span>
+                          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                          </svg>
                         </button>
                       </div>
                     </div>

@@ -30,7 +30,7 @@ export default function SearchBar({ query, onQueryChange, matchCount, onSelectQu
         {query && (
           <button
             onClick={() => onQueryChange('')}
-            className="text-slate-400 hover:text-slate-200 mr-2 text-xs"
+            className="text-slate-400 hover:text-slate-200 mr-2 text-xs cursor-pointer"
           >
             ✕
           </button>
@@ -43,14 +43,17 @@ export default function SearchBar({ query, onQueryChange, matchCount, onSelectQu
 
       {/* Quick Search Suggestions */}
       <div className="flex flex-wrap items-center gap-2 text-xs">
-        <span className="text-slate-400 font-medium flex items-center gap-1">
-          <span className="text-amber-400 text-xs">✨</span> Quick search:
+        <span className="text-slate-400 font-medium flex items-center gap-1.5">
+          <svg className="w-3.5 h-3.5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+          <span>Quick search:</span>
         </span>
         {QUICK_SEARCH_CHIPS.map((chip) => (
           <button
             key={chip}
             onClick={() => onSelectQuickChip(chip)}
-            className="px-2.5 py-1 rounded-md bg-[#162238] border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800 hover:border-slate-500 transition-colors"
+            className="px-2.5 py-1 rounded-md bg-[#162238] border border-slate-700/60 text-slate-300 hover:text-white hover:bg-slate-800 hover:border-slate-500 transition-colors cursor-pointer"
           >
             "{chip}"
           </button>

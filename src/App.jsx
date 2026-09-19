@@ -171,8 +171,10 @@ export default function App() {
         {/* Modal / Floating Header */}
         <header className="flex items-center justify-between gap-3 pb-3 border-b border-slate-800/80 mb-4">
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400 font-bold text-base">
-              ⚡
+            <div className="w-8 h-8 rounded-lg bg-blue-600/20 border border-blue-500/40 flex items-center justify-center text-blue-400">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
             </div>
             <div>
               <h1 className="text-base font-bold tracking-tight text-white">Smart Search</h1>
@@ -187,10 +189,13 @@ export default function App() {
                 loadCards()
               }}
               disabled={isLoadingCards}
-              className="p-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs border border-slate-700 transition-colors flex items-center gap-1"
+              className="px-2.5 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs border border-slate-700 transition-colors flex items-center gap-1.5 cursor-pointer"
               title="Refresh Board Cards"
             >
-              🔄 Refresh
+              <svg className={`w-3.5 h-3.5 ${isLoadingCards ? 'animate-spin' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              <span>Refresh</span>
             </button>
           </div>
         </header>
