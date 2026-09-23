@@ -48,7 +48,14 @@ export async function fetchCurrentBoardCards(t) {
       // Member extraction
       const assignedMembers = card.members?.map(m => m.username || m.fullName || m.id) || []
       const primaryMember = card.members?.[0]
-      const avatar = primaryMember?.avatar || primaryMember?.avatarUrl ? (primaryMember.avatarUrl || `${primaryMember.avatar}/50.png`) : null
+      let avatar = null
+      if (primaryMember) {
+        if (primaryMember.avatarUrl && primaryMember.avatarUrl.startsWith('http')) {
+          avatar = primaryMember.avatarUrl
+        } else if (primaryMember.avatar) {
+          avatar = `https://trello-avatars.s3.amazonaws.com/${primaryMember.avatar}/50.png`
+        }
+      }
 
       return {
         id: card.id,

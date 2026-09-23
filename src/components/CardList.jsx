@@ -184,6 +184,9 @@ export default function CardList({ cards, sortBy, onSortByChange, onOpenCard }) 
                           <img
                             src={card.avatar}
                             alt="Assigned Member"
+                            onError={(e) => {
+                              e.target.style.display = 'none'
+                            }}
                             className="w-6 h-6 rounded-full object-cover ring-1 ring-slate-700"
                           />
                         )}
