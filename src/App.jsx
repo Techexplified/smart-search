@@ -68,7 +68,17 @@ export default function App() {
 
     if (!cardUrl) return
 
-    // Try Trello SDK navigate first — navigates the host Trello window
+    // Step 1: Close the Smart Search modal so Trello removes its overlay
+    if (tContext && typeof tContext.closeModal === 'function') {
+      try {
+        tContext.closeModal()
+      } catch {
+        // ignore — will still navigate
+      }
+    }
+
+    // Step 2: Navigate to the card URL after modal closes
+    // Use t.navigate() which routes within Trello's SPA properly
     if (tContext && typeof tContext.navigate === 'function') {
       try {
         tContext.navigate({ url: cardUrl })
@@ -78,17 +88,16 @@ export default function App() {
       }
     }
 
-    // Navigate parent window directly — opens card in same tab, closes modal
+    // Step 3: Direct parent window navigation
     try {
       if (window.top) {
         window.top.location.href = cardUrl
         return
       }
     } catch {
-      // Cross-origin restriction, fallback to same-window navigate
+      // Cross-origin fallback
     }
 
-    // Last resort: navigate current frame
     window.location.href = cardUrl
   }
 
