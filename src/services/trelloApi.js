@@ -1,6 +1,4 @@
-import { MOCK_CARDS } from '../data/mockCards'
-
-export function filterCards(cards = MOCK_CARDS, filterState = {}) {
+export function filterCards(cards = [], filterState = {}) {
   const {
     query = '',
     quickFilter = null, // 'me' | 'highPriority' | 'overdue' | 'incompleteChecklist' | null

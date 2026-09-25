@@ -154,8 +154,6 @@ export default function App() {
     const newPreset = {
       id: `custom-${Date.now()}`,
       name: presetName.trim(),
-      icon: 'filter',
-      color: 'text-blue-400 border-blue-500/40 bg-blue-500/10',
       criteria: {
         query,
         quickFilter,

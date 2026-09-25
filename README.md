@@ -1,16 +1,58 @@
-# React + Vite
+# Smart Search — Trello Power-Up
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Instantly search, filter, and jump to any card across your Trello board — by keyword, member, priority, due date, and more.
 
-Currently, two official plugins are available:
+## Live URL
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Connector:** `https://smart-search-murex.vercel.app/connector.html`
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Real-time keyword search across card titles, descriptions, labels, lists and boards
+- Deep filters: list, member, priority, due date, checklist status
+- Quick filter pills: Me, High Priority, Overdue, Incomplete Checklist
+- Saved smart searches — name and reapply filter presets in one click
+- Opens cards directly in Trello (no new tab)
 
-## Expanding the ESLint configuration
+## Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React 19, Tailwind CSS 4, Vite 8
+- Trello Power-Up Client SDK (zero-auth, no API key needed)
+- Deployed on Vercel
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Build & Deploy
+
+```bash
+npm run build
+git push   # Vercel auto-deploys from main branch
+```
+
+## Project Structure
+
+```
+public/
+  connector.html      # Trello connector (calls TrelloPowerUp.initialize)
+  icons/              # Self-hosted SVG icons for board button
+src/
+  App.jsx             # Root component — state, search logic, card navigation
+  main.jsx            # React entry point
+  index.css           # Global styles + Tailwind
+  trelloPowerUp.js    # TrelloPowerUp.iframe() context helper
+  components/
+    SearchBar.jsx     # Keyword input + quick search chips
+    DeepFilters.jsx   # Advanced filter panel
+    SavedSearches.jsx # Saved search presets
+    CardList.jsx      # Filtered card results list
+  services/
+    trelloBoardSdk.js # Fetches real board cards via Trello SDK
+    trelloApi.js      # Client-side filter + sort logic
+  data/
+    mockCards.js      # Fallback data used outside Trello
+```

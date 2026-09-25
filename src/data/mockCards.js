@@ -2,55 +2,47 @@ export const SAVED_SEARCHES = [
   {
     id: 'overdue-high',
     name: 'My Overdue High Priority',
-    color: 'text-red-400 border-red-500/40 bg-red-500/10',
-    icon: 'error',
     criteria: { quickFilter: 'overdue', filterState: { priority: 'High Priority' } }
   },
   {
     id: 'waiting-client',
     name: 'Waiting for Client',
-    color: 'text-amber-400 border-amber-500/40 bg-amber-500/10',
-    icon: 'time',
     criteria: { query: 'Client' }
   },
   {
     id: 'qa-pending',
     name: 'QA Pending',
-    color: 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10',
-    icon: 'check',
     criteria: { filterState: { list: 'Under Review' } }
   },
   {
     id: 'unassigned-urgent',
     name: 'Unassigned Urgent',
-    color: 'text-purple-400 border-purple-500/40 bg-purple-500/10',
-    icon: 'help',
     criteria: { filterState: { priority: 'Urgent' } }
   },
 ]
 
 export const QUICK_SEARCH_CHIPS = [
-  "Client Approval",
-  "Homepage",
-  "Pricing page",
-  "Mobile onboarding",
-  "Acme Global"
+  'Client Approval',
+  'Homepage',
+  'Pricing page',
+  'Mobile onboarding',
+  'Acme Global'
 ]
 
 export const AVAILABLE_BOARDS = [
-  "Marketing Campaign",
-  "Product Engineering",
-  "Design & UX System",
-  "Customer Success",
-  "Infrastructure & Cloud"
+  'Marketing Campaign',
+  'Product Engineering',
+  'Design & UX System',
+  'Customer Success',
+  'Infrastructure & Cloud'
 ]
 
 export const AVAILABLE_LISTS = [
-  "Published / Done",
-  "In Progress",
-  "Under Review",
-  "Backlog",
-  "QA & Verification"
+  'Published / Done',
+  'In Progress',
+  'Under Review',
+  'Backlog',
+  'QA & Verification'
 ]
 
 export const AVAILABLE_MEMBERS = [
@@ -61,14 +53,14 @@ export const AVAILABLE_MEMBERS = [
 ]
 
 export const AVAILABLE_LABELS = [
-  "Client Facing",
-  "Design & UX",
-  "Marketing",
-  "High Impact",
-  "Frontend",
-  "Backend API",
-  "Bug Fix",
-  "Compliance"
+  'Client Facing',
+  'Design & UX',
+  'Marketing',
+  'High Impact',
+  'Frontend',
+  'Backend API',
+  'Bug Fix',
+  'Compliance'
 ]
 
 export const MOCK_CARDS = [
@@ -86,7 +78,8 @@ export const MOCK_CARDS = [
     assignedMembers: ['me', 'sarah'],
     labels: ['Marketing', 'Client Facing', 'High Impact'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
   {
     id: 'card-2',
@@ -102,7 +95,8 @@ export const MOCK_CARDS = [
     assignedMembers: ['me', 'alex'],
     labels: ['Design & UX', 'Frontend', 'High Impact'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
   {
     id: 'card-3',
@@ -118,7 +112,8 @@ export const MOCK_CARDS = [
     assignedMembers: ['devon'],
     labels: ['Frontend', 'Client Facing'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
   {
     id: 'card-4',
@@ -134,12 +129,13 @@ export const MOCK_CARDS = [
     assignedMembers: ['me'],
     labels: ['Backend API', 'Compliance', 'High Impact'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
   {
     id: 'card-5',
     title: 'Client Approval workflow for custom domain SSL certificates',
-    description: 'Automate Let\'s Encrypt certificate renewal notification hooks and client dashboard approval status.',
+    description: "Automate Let's Encrypt certificate renewal notification hooks and client dashboard approval status.",
     board: 'Infrastructure & Cloud',
     list: 'In Progress',
     priority: 'Medium',
@@ -150,7 +146,8 @@ export const MOCK_CARDS = [
     assignedMembers: ['alex', 'sarah'],
     labels: ['Client Facing', 'Backend API'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
   {
     id: 'card-6',
@@ -166,22 +163,7 @@ export const MOCK_CARDS = [
     assignedMembers: ['me'],
     labels: ['Bug Fix', 'Frontend', 'Design & UX'],
     status: 'Active',
-    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80'
+    avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=150&auto=format&fit=crop&q=80',
+    url: null
   },
-  {
-    id: 'card-7',
-    title: 'Archived: Legacy OAuth1 migration documentation',
-    description: 'Deprecated documentation for v1 REST authentication endpoints.',
-    board: 'Customer Success',
-    list: 'Published / Done',
-    priority: 'Low',
-    dueDate: '2026-05-15',
-    isOverdue: false,
-    hasIncompleteChecklist: false,
-    checklistText: '2/2 completed',
-    assignedMembers: ['devon'],
-    labels: ['Backend API'],
-    status: 'Archived',
-    avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80'
-  }
 ]
