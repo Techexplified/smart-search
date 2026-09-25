@@ -6,20 +6,19 @@
     <!-- Official Trello Power-Up Client Library -->
     <script src="https://p.trellocdn.com/power-up.min.js"></script>
     <script>
-      // Dedicated Trello Power-Up connector capability initialization (Zero Auth)
       window.TrelloPowerUp.initialize({
         'board-buttons': function (t) {
           return [
             {
               icon: {
-                dark: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg',
-                light: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg'
+                dark: window.location.origin + '/icons/search-dark.svg',
+                light: window.location.origin + '/icons/search-light.svg'
               },
               text: 'Smart Search',
               callback: function (tContext) {
                 return tContext.modal({
                   title: 'Search Board Cards',
-                  url: './index.html',
+                  url: window.location.origin + '/index.html',
                   height: 680,
                   fullscreen: false
                 });
@@ -28,20 +27,7 @@
           ];
         },
         'card-buttons': function (t) {
-          return [
-            {
-              icon: 'https://cdn.jsdelivr.net/npm/lucide-static@latest/icons/search.svg',
-              text: 'Smart Search',
-              callback: function (tContext) {
-                return tContext.modal({
-                  title: 'Search Board Cards',
-                  url: './index.html',
-                  height: 680,
-                  fullscreen: false
-                });
-              }
-            }
-          ];
+          return [];
         },
         'card-badges': function (t) {
           return [];
