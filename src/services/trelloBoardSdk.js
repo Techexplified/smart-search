@@ -111,8 +111,7 @@ export async function fetchCurrentBoardCards(t) {
         shortLink: card.shortLink || null
       }
     })
-  } catch (err) {
-    console.error('Error fetching cards via Trello SDK:', err)
+  } catch {
     return []
   }
 }
