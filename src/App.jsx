@@ -66,8 +66,10 @@ export default function App() {
     const cardUrl = card.url || card.shortUrl ||
       (card.shortLink ? `https://trello.com/c/${card.shortLink}` : null)
 
-    // Try Trello SDK navigate (works inside modal iframe)
-    if (tContext && cardUrl) {
+    if (!cardUrl) return
+
+    // Try Trello SDK navigate first — navigates the host Trello window
+    if (tContext && typeof tContext.navigate === 'function') {
       try {
         tContext.navigate({ url: cardUrl })
         return
@@ -76,10 +78,18 @@ export default function App() {
       }
     }
 
-    // Direct URL open fallback
-    if (cardUrl) {
-      window.open(cardUrl, '_blank', 'noopener,noreferrer')
+    // Navigate parent window directly — opens card in same tab, closes modal
+    try {
+      if (window.top) {
+        window.top.location.href = cardUrl
+        return
+      }
+    } catch {
+      // Cross-origin restriction, fallback to same-window navigate
     }
+
+    // Last resort: navigate current frame
+    window.location.href = cardUrl
   }
 
   // Apply filtering logic to board cards
