@@ -3,13 +3,10 @@ import SavedSearches from './components/SavedSearches'
 import SearchBar from './components/SearchBar'
 import DeepFilters from './components/DeepFilters'
 import CardList from './components/CardList'
-import { initTrelloPowerUp, getTrelloContext } from './trelloPowerUp'
+import { getTrelloContext } from './trelloPowerUp'
 import { fetchCurrentBoardCards } from './services/trelloBoardSdk'
 import { MOCK_CARDS, SAVED_SEARCHES } from './data/mockCards'
 import { filterCards } from './services/trelloApi'
-
-// Initialize Trello Power-Up hooks if loaded inside Trello
-initTrelloPowerUp()
 
 const INITIAL_FILTER_STATE = {
   board: 'All Boards',
