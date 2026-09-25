@@ -1,4 +1,4 @@
-# Quick Find — Trello Power-Up
+# Pinpoint — Trello Power-Up
 
 Instantly search, filter, and jump to any card across your Trello board — by keyword, member, priority, due date, and more.
 
@@ -11,7 +11,7 @@ Instantly search, filter, and jump to any card across your Trello board — by k
 - Real-time keyword search across card titles, descriptions, labels, lists and boards
 - Deep filters: list, member, priority, due date, checklist status
 - Quick filter pills: Me, High Priority, Overdue, Incomplete Checklist
-- Saved quick finds — name and reapply filter presets in one click
+- Saved Pinpoints — name and reapply filter presets in one click
 - Opens cards directly in Trello (no new tab)
 
 ## Tech Stack

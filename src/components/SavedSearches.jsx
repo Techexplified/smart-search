@@ -28,7 +28,7 @@ export default function SavedSearches({
   return (
     <div className="flex flex-wrap items-center gap-3 mb-6">
       <div className="text-xs font-semibold tracking-wider text-slate-400 uppercase">
-        SAVED QUICK FINDS:
+        SAVED PINPOINTS:
       </div>
 
       <div className="flex flex-wrap items-center gap-2.5">
