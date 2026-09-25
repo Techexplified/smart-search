@@ -5,6 +5,12 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Trello Smart Search Power-Up</title>
+    <!--
+      Load the Trello Power-Up client library so TrelloPowerUp.iframe() is
+      available in this modal frame. We do NOT call TrelloPowerUp.initialize()
+      here — that belongs only in connector.html.
+    -->
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
   </head>
   <body>
     <div id="root"></div>
