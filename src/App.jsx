@@ -68,7 +68,7 @@ export default function App() {
 
     if (!cardUrl) return
 
-    // Step 1: Close the Smart Search modal so Trello removes its overlay
+    // Step 1: Close the Quick Find modal so Trello removes its overlay
     if (tContext && typeof tContext.closeModal === 'function') {
       try {
         tContext.closeModal()
@@ -197,7 +197,7 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <h1 className="text-base font-bold tracking-tight text-white">Smart Search</h1>
+              <h1 className="text-base font-bold tracking-tight text-white">Quick Find</h1>
               <p className="text-[11px] text-slate-400">Instant search & deep filter for board cards</p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function App() {
           </div>
         ) : (
           <>
-            {/* Saved Smart Searches Bar */}
+            {/* Saved Quick Finds Bar */}
             <SavedSearches
               savedSearches={savedSearches}
               activeSavedSearch={activeSavedSearch}
