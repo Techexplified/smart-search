@@ -24,11 +24,11 @@ export function filterCards(cards = MOCK_CARDS, filterState = {}) {
     // Keyword Query Search (matches title, description, board, list, or labels)
     if (query.trim()) {
       const q = query.toLowerCase()
-      const matchTitle = card.title.toLowerCase().includes(q)
-      const matchDesc = card.description.toLowerCase().includes(q)
-      const matchBoard = card.board.toLowerCase().includes(q)
-      const matchList = card.list.toLowerCase().includes(q)
-      const matchLabels = card.labels.some(l => l.toLowerCase().includes(q))
+      const matchTitle = (card.title || '').toLowerCase().includes(q)
+      const matchDesc = (card.description || '').toLowerCase().includes(q)
+      const matchBoard = (card.board || '').toLowerCase().includes(q)
+      const matchList = (card.list || '').toLowerCase().includes(q)
+      const matchLabels = (card.labels || []).some(l => (l || '').toLowerCase().includes(q))
 
       if (!matchTitle && !matchDesc && !matchBoard && !matchList && !matchLabels) {
         return false

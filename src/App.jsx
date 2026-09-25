@@ -63,16 +63,22 @@ export default function App() {
 
   // Open / Redirect to selected Trello card
   const handleOpenCard = (card) => {
-    if (tContext && typeof tContext.showCard === 'function') {
+    const cardUrl = card.url || card.shortUrl ||
+      (card.shortLink ? `https://trello.com/c/${card.shortLink}` : null)
+
+    // Try Trello SDK navigate (works inside modal iframe)
+    if (tContext && cardUrl) {
       try {
-        tContext.showCard(card.id)
+        tContext.navigate({ url: cardUrl })
         return
       } catch {
         // Fallback below
       }
     }
-    if (card.url) {
-      window.open(card.url, '_blank')
+
+    // Direct URL open fallback
+    if (cardUrl) {
+      window.open(cardUrl, '_blank', 'noopener,noreferrer')
     }
   }
 
