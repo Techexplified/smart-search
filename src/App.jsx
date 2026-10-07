@@ -68,7 +68,7 @@ export default function App() {
 
     if (!cardUrl) return
 
-    // Step 1: Close the Pinpoint modal so Trello removes its overlay
+    // Step 1: Close the modal so Trello removes its overlay
     if (tContext && typeof tContext.closeModal === 'function') {
       try {
         tContext.closeModal()
@@ -197,7 +197,7 @@ export default function App() {
               </svg>
             </div>
             <div>
-              <h1 className="text-base font-bold tracking-tight text-white">Pinpoint</h1>
+              <h1 className="text-base font-bold tracking-tight text-white">Search the Card</h1>
               <p className="text-[11px] text-slate-400">Instant smart search & deep filter for board cards</p>
             </div>
           </div>
@@ -228,7 +228,7 @@ export default function App() {
           </div>
         ) : (
           <>
-            {/* Saved Pinpoints Bar */}
+            {/* Saved Searches Bar */}
             <SavedSearches
               savedSearches={savedSearches}
               activeSavedSearch={activeSavedSearch}
